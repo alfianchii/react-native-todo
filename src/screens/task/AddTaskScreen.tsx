@@ -14,24 +14,24 @@ import { OptionRow } from "@components/Base/OptionRow"
 import { SelectSheet } from "@components/Base/SelectSheet"
 
 const dateOptions = [
-	{ id: "today", label: "Today", icon: "today" as const, iconColor: "#db2777", iconBackgroundColor: "#fce7f3" },
-	{ id: "tomorrow", label: "Tomorrow", icon: "event" as const, iconColor: "#db2777", iconBackgroundColor: "#fce7f3" },
-	{ id: "this_week", label: "This Week", icon: "date-range" as const, iconColor: "#db2777", iconBackgroundColor: "#fce7f3" },
-	{ id: "next_week", label: "Next Week", icon: "calendar-month" as const, iconColor: "#db2777", iconBackgroundColor: "#fce7f3" },
-	{ id: "no_date", label: "No Due Date", icon: "event-busy" as const, iconColor: "#6b7280", iconBackgroundColor: "#f3f4f6" },
+	{ id: "today", label: "Today", icon: "today" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
+	{ id: "tomorrow", label: "Tomorrow", icon: "event" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
+	{ id: "this_week", label: "This Week", icon: "date-range" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
+	{ id: "next_week", label: "Next Week", icon: "calendar-month" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
+	{ id: "no_date", label: "No Due Date", icon: "event-busy" as const, iconColor: colors.gray500, iconBackgroundColor: colors.gray100 },
 ]
 
 const categoryOptions = [
-	{ id: "inbox", label: "Inbox", icon: "inbox" as const, iconColor: "#2563eb", iconBackgroundColor: "#dbeafe" },
-	{ id: "work", label: "Work", icon: "work" as const, iconColor: "#7c3aed", iconBackgroundColor: "#ede9fe" },
-	{ id: "personal", label: "Personal", icon: "person" as const, iconColor: "#059669", iconBackgroundColor: "#d1fae5" },
-	{ id: "college", label: "College", icon: "school" as const, iconColor: "#0891b2", iconBackgroundColor: "#cffafe" },
+	{ id: "inbox", label: "Inbox", icon: "inbox" as const, iconColor: colors.categoryInbox, iconBackgroundColor: colors.categoryInboxBg },
+	{ id: "work", label: "Work", icon: "work" as const, iconColor: colors.categoryWork, iconBackgroundColor: colors.categoryWorkBg },
+	{ id: "personal", label: "Personal", icon: "person" as const, iconColor: colors.categoryPersonal, iconBackgroundColor: colors.categoryPersonalBg },
+	{ id: "college", label: "College", icon: "school" as const, iconColor: colors.categoryCollege, iconBackgroundColor: colors.categoryCollegeBg },
 ]
 
 const priorityOptions = [
-	{ id: "low", label: "Low", icon: "flag" as const, iconColor: "#22c55e", iconBackgroundColor: "#dcfce7" },
-	{ id: "medium", label: "Medium", icon: "flag" as const, iconColor: "#f59e0b", iconBackgroundColor: "#fef3c7" },
-	{ id: "high", label: "High", icon: "flag" as const, iconColor: "#ef4444", iconBackgroundColor: "#fee2e2" },
+	{ id: "low", label: "Low", icon: "flag" as const, iconColor: colors.priorityLow, iconBackgroundColor: colors.priorityLowBg },
+	{ id: "medium", label: "Medium", icon: "flag" as const, iconColor: colors.priorityMedium, iconBackgroundColor: colors.priorityMediumBg },
+	{ id: "high", label: "High", icon: "flag" as const, iconColor: colors.priorityHigh, iconBackgroundColor: colors.priorityHighBg },
 ]
 
 interface AddTaskScreenProps {
@@ -93,7 +93,6 @@ export const AddTaskScreen: React.FC<AddTaskScreenProps> = ({
 					keyboardShouldPersistTaps="handled"
 					bounces={false}
 				>
-					{/* Header */}
 					<View style={styles.header}>
 						<Text style={styles.headerTitle}>Add New Task</Text>
 						<TouchableOpacity
@@ -105,7 +104,6 @@ export const AddTaskScreen: React.FC<AddTaskScreenProps> = ({
 						</TouchableOpacity>
 					</View>
 
-					{/* Content */}
 					<View style={styles.content}>
 						<View style={styles.inputSection}>
 							<TextInput
@@ -154,7 +152,6 @@ export const AddTaskScreen: React.FC<AddTaskScreenProps> = ({
 						</View>
 					</View>
 
-					{/* Footer */}
 					<View style={styles.footer}>
 						<TouchableOpacity
 							style={[styles.saveButton, !title.trim() && styles.saveButtonDisabled]}
@@ -167,7 +164,6 @@ export const AddTaskScreen: React.FC<AddTaskScreenProps> = ({
 						</TouchableOpacity>
 					</View>
 
-					{/* Safe area padding */}
 					<View style={styles.safeArea} />
 				</ScrollView>
 			</BottomSheet>
