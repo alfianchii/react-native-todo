@@ -1,62 +1,58 @@
 import { Task, FilterOption } from '@type/task';
 
+// Helper to get dates
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+const nextWeek = new Date(today);
+nextWeek.setDate(nextWeek.getDate() + 7);
+
+const yesterday = new Date(today);
+yesterday.setDate(yesterday.getDate() - 1);
+
 export const mockTasks: Task[] = [
   {
     id: '1',
     title: 'Design System Review',
     priority: 'high',
-    date: 'Jan 10',
-    time: '10:00 AM',
+    dueDate: today,
     completed: false,
   },
   {
     id: '2',
     title: 'Update Client Presentation',
     priority: 'medium',
-    date: 'Jan 10',
+    dueDate: today,
     completed: false,
   },
   {
     id: '3',
     title: 'Grocery Shopping',
     priority: 'low',
-    date: 'Jan 11',
+    dueDate: tomorrow,
     completed: false,
   },
   {
     id: '4',
     title: 'Morning Standup',
     priority: 'low',
-    date: 'Jan 10',
+    dueDate: yesterday,
     completed: true,
   },
   {
     id: '5',
-    title: 'Grocery Shopping',
-    priority: 'low',
-    date: 'Jan 11',
+    title: 'Team Meeting',
+    priority: 'medium',
+    dueDate: tomorrow,
     completed: false,
   },
   {
     id: '6',
-    title: 'Grocery Shopping',
-    priority: 'low',
-    date: 'Jan 11',
-    completed: false,
-  },
-  {
-    id: '7',
-    title: 'Grocery Shopping',
-    priority: 'low',
-    date: 'Jan 11',
-    completed: true,
-  },
-  {
-    id: '8',
-    title: 'Grocery Shopping',
+    title: 'Code Review',
     priority: 'high',
-    date: 'Jan 11',
-    completed: true,
+    dueDate: nextWeek,
+    completed: false,
   },
 ];
 

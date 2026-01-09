@@ -3,9 +3,9 @@ export type Priority = 'high' | 'medium' | 'low';
 export interface Task {
   id: string;
   title: string;
+  description?: string;
   priority: Priority;
-  date: string;
-  time?: string;
+  dueDate: Date;
   completed: boolean;
 }
 

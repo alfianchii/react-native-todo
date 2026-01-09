@@ -16,7 +16,8 @@
 			"@components/*": ["./src/components/*"],
 			"@screens/*": ["./src/screens/*"],
 			"@theme/*": ["./src/theme/*"],
-			"@type/*": ["src/types/*"],
+			"@type/*": ["./src/types/*"],
+			"@utils/*": ["./src/utils/*"],
 			"@data/*": ["./src/data/*"],
 			"@images/*": ["./src/assets/images/*"]
 		}

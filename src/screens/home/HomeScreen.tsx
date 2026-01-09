@@ -1,20 +1,23 @@
-import React, { useState, useMemo } from "react"
+import React, { useState } from "react"
 import { Text, ScrollView, StyleSheet } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { LinearGradient } from "expo-linear-gradient"
 import { colors } from "@theme/colors"
 import { mockTasks, filterOptions } from "@data/mockTasks"
-import { Task } from "@type/task"
+import { Task, Priority } from "@type/task"
 import { Header } from "@components/Layout/Header"
 import { SearchBar } from "@components/Task/SearchBar"
 import { FilterChips } from "@components/Task/FilterChips"
 import { TaskCard } from "@components/Task/TaskCard"
 import { FloatingActionButton } from "@components/Task/FloatingActionButton"
+import { AddTaskScreen } from "@screens/task/AddTaskScreen"
+import { isToday, isFuture, getDateFromSelection } from "@utils/date"
 
 export const HomeScreen: React.FC = () => {
 	const [selectedFilter, setSelectedFilter] = useState("all")
 	const [searchQuery, setSearchQuery] = useState("")
 	const [tasks, setTasks] = useState<Task[]>(mockTasks)
+	const [isAddTaskVisible, setIsAddTaskVisible] = useState(false)
 
 	const handleToggleComplete = (id: string) => {
 		setTasks((prevTasks) => prevTasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)))
@@ -25,7 +28,25 @@ export const HomeScreen: React.FC = () => {
 	}
 
 	const handleAddTask = () => {
-		console.log("Add new task")
+		setIsAddTaskVisible(true)
+	}
+
+	const handleSaveTask = (newTask: { title: string; description: string; dueDate: string; category: string; priority: string }) => {
+		const priorityMap: Record<string, Priority> = {
+			"High": "high",
+			"Medium": "medium",
+			"Low": "low",
+		}
+
+		const task: Task = {
+			id: Date.now().toString(),
+			title: newTask.title,
+			description: newTask.description,
+			dueDate: getDateFromSelection(newTask.dueDate),
+			priority: priorityMap[newTask.priority] || "low",
+			completed: false,
+		}
+		setTasks((prevTasks) => [task, ...prevTasks])
 	}
 
 	const handleNotificationPress = () => {
@@ -34,8 +55,8 @@ export const HomeScreen: React.FC = () => {
 
 	const filteredTasks = tasks.filter((task) => {
 		if (selectedFilter === "completed") return task.completed
-		if (selectedFilter === "today") return !task.completed && task.date === "Jan 10"
-		if (selectedFilter === "upcoming") return !task.completed && task.date !== "Jan 10"
+		if (selectedFilter === "today") return !task.completed && isToday(task.dueDate)
+		if (selectedFilter === "upcoming") return !task.completed && isFuture(task.dueDate) && !isToday(task.dueDate)
 		return true
 	})
 
@@ -59,6 +80,12 @@ export const HomeScreen: React.FC = () => {
 			<LinearGradient colors={["transparent", colors.background]} style={styles.bottomGradient} pointerEvents="none" />
 
 			<FloatingActionButton onPress={handleAddTask} />
+
+			<AddTaskScreen
+				visible={isAddTaskVisible}
+				onClose={() => setIsAddTaskVisible(false)}
+				onSave={handleSaveTask}
+			/>
 		</SafeAreaView>
 	)
 }
