@@ -1,15 +1,6 @@
 import { colors } from '@theme/colors'
-import { MaterialIcons } from '@expo/vector-icons'
-
-type MaterialIconName = keyof typeof MaterialIcons.glyphMap
-
-export interface SelectOption {
-	id: string
-	label: string
-	icon: MaterialIconName
-	iconColor: string
-	iconBackgroundColor: string
-}
+import { Category, Priority } from '@type/task'
+import { SelectOption } from '@type/options'
 
 export const dateOptions: SelectOption[] = [
 	{ id: 'today', label: 'Today', icon: 'today', iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
@@ -30,3 +21,16 @@ export const priorityOptions: SelectOption[] = [
 	{ id: 'medium', label: 'Medium', icon: 'flag', iconColor: colors.priorityMedium, iconBackgroundColor: colors.priorityMediumBg },
 	{ id: 'high', label: 'High', icon: 'flag', iconColor: colors.priorityHigh, iconBackgroundColor: colors.priorityHighBg },
 ]
+
+export const priorityMap: Record<string, Priority> = {
+	'High': 'high',
+	'Medium': 'medium',
+	'Low': 'low',
+}
+
+export const categoryMap: Record<string, Category> = {
+	'Inbox': 'inbox',
+	'Work': 'work',
+	'Personal': 'personal',
+	'College': 'college',
+}

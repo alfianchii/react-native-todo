@@ -107,24 +107,24 @@ export const AddTaskScreen: React.FC<AddTaskScreenProps> = ({
 						<View style={styles.optionsSection}>
 							<OptionRow
 								icon="event"
-								iconBackgroundColor={selectedDate.iconBackgroundColor}
-								iconColor={selectedDate.iconColor}
+								iconBackgroundColor={selectedDate.iconBackgroundColor!}
+								iconColor={selectedDate.iconColor!}
 								label="DUE DATE"
 								value={selectedDate.label}
 								onPress={() => setIsDateSheetVisible(true)}
 							/>
 							<OptionRow
 								icon="label"
-								iconBackgroundColor={selectedCategory.iconBackgroundColor}
-								iconColor={selectedCategory.iconColor}
+								iconBackgroundColor={selectedCategory.iconBackgroundColor!}
+								iconColor={selectedCategory.iconColor!}
 								label="CATEGORY"
 								value={selectedCategory.label}
 								onPress={() => setIsCategorySheetVisible(true)}
 							/>
 							<OptionRow
 								icon="flag"
-								iconBackgroundColor={selectedPriority.iconBackgroundColor}
-								iconColor={selectedPriority.iconColor}
+								iconBackgroundColor={selectedPriority.iconBackgroundColor!}
+								iconColor={selectedPriority.iconColor!}
 								label="PRIORITY"
 								value={selectedPriority.label}
 								onPress={() => setIsPrioritySheetVisible(true)}

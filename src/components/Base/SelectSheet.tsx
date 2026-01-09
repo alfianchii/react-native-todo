@@ -8,16 +8,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@theme/colors"
 import { BottomSheet } from "./BottomSheet"
-
-type MaterialIconName = keyof typeof MaterialIcons.glyphMap
-
-interface SelectOption {
-	id: string
-	label: string
-	icon?: MaterialIconName
-	iconColor?: string
-	iconBackgroundColor?: string
-}
+import { SelectOption } from "@type/options"
 
 interface SelectSheetProps {
 	visible: boolean
