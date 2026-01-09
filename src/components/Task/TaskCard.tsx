@@ -7,6 +7,8 @@ import { PriorityBadge } from "./PriorityBadge"
 import { Card } from "@components/Base/Card"
 import { Checkbox } from "@components/Base/Checkbox"
 import { Button } from "@components/Base/Button"
+import { formatDate } from "@utils/date"
+
 interface TaskCardProps {
 	task: Task
 	onToggleComplete: (id: string) => void
@@ -60,14 +62,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggleComplete, onMe
 						<PriorityBadge priority={priority} />
 						<View style={styles.metaItem}>
 							<MaterialIcons name="event" size={14} color={colors.textMuted} />
-							<Text style={styles.metaText}>{task.date}</Text>
+							<Text style={styles.metaText}>{formatDate(task.dueDate)}</Text>
 						</View>
-						{task.time && (
-							<View style={styles.metaItem}>
-								<MaterialIcons name="schedule" size={14} color={colors.textMuted} />
-								<Text style={styles.metaText}>{task.time}</Text>
-							</View>
-						)}
 					</View>
 				</View>
 				{onMenuPress && <Button icon="more-vert" onPress={() => onMenuPress(task.id)} size={28} iconSize={20} iconColor={colors.gray300} />}

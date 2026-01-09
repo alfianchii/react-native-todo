@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import React, { useState } from "react"
 import { Text, ScrollView, StyleSheet } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { LinearGradient } from "expo-linear-gradient"
@@ -11,6 +11,7 @@ import { FilterChips } from "@components/Task/FilterChips"
 import { TaskCard } from "@components/Task/TaskCard"
 import { FloatingActionButton } from "@components/Task/FloatingActionButton"
 import { AddTaskScreen } from "@screens/task/AddTaskScreen"
+import { isToday, isFuture, getDateFromSelection } from "@utils/date"
 
 export const HomeScreen: React.FC = () => {
 	const [selectedFilter, setSelectedFilter] = useState("all")
@@ -41,7 +42,7 @@ export const HomeScreen: React.FC = () => {
 			id: Date.now().toString(),
 			title: newTask.title,
 			description: newTask.description,
-			dueDate: new Date(),
+			dueDate: getDateFromSelection(newTask.dueDate),
 			priority: priorityMap[newTask.priority] || "low",
 			completed: false,
 		}
@@ -54,8 +55,8 @@ export const HomeScreen: React.FC = () => {
 
 	const filteredTasks = tasks.filter((task) => {
 		if (selectedFilter === "completed") return task.completed
-		if (selectedFilter === "today") return !task.completed && new Date(task.dueDate).toDateString() === new Date().toDateString()
-		if (selectedFilter === "upcoming") return !task.completed && new Date(task.dueDate).toDateString() > new Date().toDateString()
+		if (selectedFilter === "today") return !task.completed && isToday(task.dueDate)
+		if (selectedFilter === "upcoming") return !task.completed && isFuture(task.dueDate) && !isToday(task.dueDate)
 		return true
 	})
 
