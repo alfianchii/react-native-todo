@@ -63,6 +63,11 @@ export const HomeScreen: React.FC = () => {
 	}
 
 	const filteredTasks = tasks.filter((task) => {
+		if (searchQuery.trim()) {
+			const query = searchQuery.toLowerCase()
+			if (!task.title.toLowerCase().includes(query)) return false
+		}
+
 		if (selectedFilter === "completed") return task.completed
 		if (selectedFilter === "today") return !task.completed && isToday(task.dueDate)
 		if (selectedFilter === "upcoming") return !task.completed && isFuture(task.dueDate) && !isToday(task.dueDate)
@@ -147,5 +152,13 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		height: 40,
+	},
+	emptyState: {
+		paddingVertical: 40,
+		alignItems: "center",
+	},
+	emptyText: {
+		fontSize: 16,
+		color: colors.textMuted,
 	},
 })
