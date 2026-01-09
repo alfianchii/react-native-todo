@@ -12,26 +12,7 @@ import { colors } from "@theme/colors"
 import { BottomSheet } from "@components/Base/BottomSheet"
 import { OptionRow } from "@components/Base/OptionRow"
 import { SelectSheet } from "@components/Base/SelectSheet"
-
-const dateOptions = [
-	{ id: "today", label: "Today", icon: "today" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
-	{ id: "tomorrow", label: "Tomorrow", icon: "event" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
-	{ id: "this_week", label: "This Week", icon: "date-range" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
-	{ id: "next_week", label: "Next Week", icon: "calendar-month" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
-]
-
-const categoryOptions = [
-	{ id: "inbox", label: "Inbox", icon: "inbox" as const, iconColor: colors.categoryInbox, iconBackgroundColor: colors.categoryInboxBg },
-	{ id: "work", label: "Work", icon: "work" as const, iconColor: colors.categoryWork, iconBackgroundColor: colors.categoryWorkBg },
-	{ id: "personal", label: "Personal", icon: "person" as const, iconColor: colors.categoryPersonal, iconBackgroundColor: colors.categoryPersonalBg },
-	{ id: "college", label: "College", icon: "school" as const, iconColor: colors.categoryCollege, iconBackgroundColor: colors.categoryCollegeBg },
-]
-
-const priorityOptions = [
-	{ id: "low", label: "Low", icon: "flag" as const, iconColor: colors.priorityLow, iconBackgroundColor: colors.priorityLowBg },
-	{ id: "medium", label: "Medium", icon: "flag" as const, iconColor: colors.priorityMedium, iconBackgroundColor: colors.priorityMediumBg },
-	{ id: "high", label: "High", icon: "flag" as const, iconColor: colors.priorityHigh, iconBackgroundColor: colors.priorityHighBg },
-]
+import { dateOptions, categoryOptions, priorityOptions } from "@data/options"
 
 interface AddTaskScreenProps {
 	visible: boolean
