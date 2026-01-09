@@ -19,17 +19,13 @@ export const HomeScreen: React.FC = () => {
 	const [tasks, setTasks] = useState<Task[]>(mockTasks)
 	const [isAddTaskVisible, setIsAddTaskVisible] = useState(false)
 
-	const handleToggleComplete = (id: string) => {
-		setTasks((prevTasks) => prevTasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)))
-	}
+	const handleToggleComplete = (id: string) => setTasks((prevTasks) => prevTasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)))
 
 	const handleMenuPress = (id: string) => {
 		console.log("Menu pressed for task:", id)
 	}
 
-	const handleAddTask = () => {
-		setIsAddTaskVisible(true)
-	}
+	const handleAddTask = () => setIsAddTaskVisible(true)
 
 	const handleSaveTask = (newTask: { title: string; description: string; dueDate: string; category: string; priority: string }) => {
 		const priorityMap: Record<string, Priority> = {
@@ -72,9 +68,20 @@ export const HomeScreen: React.FC = () => {
 
 			<ScrollView style={styles.taskList} contentContainerStyle={styles.taskListContent} showsVerticalScrollIndicator={false}>
 				<Text style={styles.sectionTitle}>Today's Tasks</Text>
-				{sortedTasks.map((task) => (
-					<TaskCard key={task.id} task={task} onToggleComplete={handleToggleComplete} onMenuPress={handleMenuPress} />
-				))}
+				{sortedTasks.length === 0 ? (
+					<View style={styles.emptyState}>
+						<Text style={styles.emptyText}>No tasks found...</Text>
+					</View>
+				) : (
+					sortedTasks.map((task) => (
+						<TaskCard
+							key={task.id}
+							task={task}
+							onToggleComplete={handleToggleComplete}
+							onPress={handleTaskPress}
+						/>
+					))
+				)}
 			</ScrollView>
 
 			<LinearGradient colors={["transparent", colors.background]} style={styles.bottomGradient} pointerEvents="none" />
