@@ -78,7 +78,10 @@ export const HomeScreen: React.FC = () => {
 		return true
 	})
 
-	const sortedTasks = filteredTasks.sort((a, b) => Number(a.completed) - Number(b.completed))
+	const sortedTasks = filteredTasks.sort((next, curr) => {
+		if (next.completed !== curr.completed) return Number(next.completed) - Number(curr.completed)
+		return new Date(next.dueDate).getTime() - new Date(curr.dueDate).getTime()
+	})
 
 	if (selectedTask) {
 		return (

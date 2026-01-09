@@ -18,7 +18,6 @@ const dateOptions = [
 	{ id: "tomorrow", label: "Tomorrow", icon: "event" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
 	{ id: "this_week", label: "This Week", icon: "date-range" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
 	{ id: "next_week", label: "Next Week", icon: "calendar-month" as const, iconColor: colors.datePink, iconBackgroundColor: colors.datePinkBg },
-	{ id: "no_date", label: "No Due Date", icon: "event-busy" as const, iconColor: colors.gray500, iconBackgroundColor: colors.gray100 },
 ]
 
 const categoryOptions = [
