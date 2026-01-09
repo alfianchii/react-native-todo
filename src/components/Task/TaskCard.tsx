@@ -1,18 +1,17 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@theme/colors"
 import { Task, Priority } from "@type/task"
 import { PriorityBadge } from "./PriorityBadge"
 import { Card } from "@components/Base/Card"
 import { Checkbox } from "@components/Base/Checkbox"
-import { Button } from "@components/Base/Button"
 import { formatDate } from "@utils/date"
 
 interface TaskCardProps {
 	task: Task
 	onToggleComplete: (id: string) => void
-	onMenuPress?: (id: string) => void
+	onPress?: (id: string) => void
 }
 
 const getBorderColor = (priority: Priority): string => {
@@ -28,47 +27,51 @@ const getBorderColor = (priority: Priority): string => {
 	}
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggleComplete, onMenuPress }) => {
+export const TaskCard: React.FC<TaskCardProps> = ({ task, onToggleComplete, onPress }) => {
 	const { completed, priority } = task
 
 	if (completed) {
 		return (
-			<Card backgroundColor={colors.borderLight} showShadow={false} style={styles.completedCard} borderLeftColor={getBorderColor(priority)} borderLeftWidth={4}>
-				<View style={styles.content}>
-					<Checkbox checked={true} onPress={() => onToggleComplete(task.id)} size={20} />
-					<View style={styles.textContainer}>
-						<Text style={[styles.title, styles.titleCompleted]}>{task.title}</Text>
-						<View style={styles.metaRow}>
-							<View style={styles.metaItem}>
-								<MaterialIcons name="check-circle" size={14} color={colors.success} />
-								<Text style={styles.completedText}>Completed</Text>
+			<TouchableOpacity activeOpacity={0.8} onPress={() => onPress?.(task.id)}>
+				<Card backgroundColor={colors.borderLight} showShadow={false} style={styles.completedCard} borderLeftColor={getBorderColor(priority)} borderLeftWidth={4}>
+					<View style={styles.content}>
+						<Checkbox checked={true} onPress={() => onToggleComplete(task.id)} size={20} />
+						<View style={styles.textContainer}>
+							<Text style={[styles.title, styles.titleCompleted]}>{task.title}</Text>
+							<View style={styles.metaRow}>
+								<View style={styles.metaItem}>
+									<MaterialIcons name="check-circle" size={14} color={colors.success} />
+									<Text style={styles.completedText}>Completed</Text>
+								</View>
 							</View>
 						</View>
 					</View>
-				</View>
-			</Card>
+				</Card>
+			</TouchableOpacity>
 		)
 	}
 
 	return (
-		<Card borderLeftColor={getBorderColor(priority)} borderLeftWidth={4} style={styles.card}>
-			<View style={styles.content}>
-				<Checkbox checked={false} onPress={() => onToggleComplete(task.id)} size={20} />
-				<View style={styles.textContainer}>
-					<Text style={styles.title} numberOfLines={1}>
-						{task.title}
-					</Text>
-					<View style={styles.metaRow}>
-						<PriorityBadge priority={priority} />
-						<View style={styles.metaItem}>
-							<MaterialIcons name="event" size={14} color={colors.textMuted} />
-							<Text style={styles.metaText}>{formatDate(task.dueDate)}</Text>
+		<TouchableOpacity activeOpacity={0.8} onPress={() => onPress?.(task.id)}>
+			<Card borderLeftColor={getBorderColor(priority)} borderLeftWidth={4} style={styles.card}>
+				<View style={styles.content}>
+					<Checkbox checked={false} onPress={() => onToggleComplete(task.id)} size={20} />
+					<View style={styles.textContainer}>
+						<Text style={styles.title} numberOfLines={1}>
+							{task.title}
+						</Text>
+						<View style={styles.metaRow}>
+							<PriorityBadge priority={priority} />
+							<View style={styles.metaItem}>
+								<MaterialIcons name="event" size={14} color={colors.textMuted} />
+								<Text style={styles.metaText}>{formatDate(task.dueDate)}</Text>
+							</View>
 						</View>
 					</View>
+					<MaterialIcons name="chevron-right" size={20} color={colors.gray300} />
 				</View>
-				{onMenuPress && <Button icon="more-vert" onPress={() => onMenuPress(task.id)} size={28} iconSize={20} iconColor={colors.gray300} />}
-			</View>
-		</Card>
+			</Card>
+		</TouchableOpacity>
 	)
 }
 

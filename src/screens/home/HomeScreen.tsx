@@ -11,6 +11,7 @@ import { FilterChips } from "@components/Task/FilterChips"
 import { TaskCard } from "@components/Task/TaskCard"
 import { FloatingActionButton } from "@components/Task/FloatingActionButton"
 import { AddTaskScreen } from "@screens/task/AddTaskScreen"
+import { TaskDetailScreen } from "@screens/task/TaskDetailScreen"
 import { isToday, isFuture, getDateFromSelection } from "@utils/date"
 
 export const HomeScreen: React.FC = () => {
@@ -18,11 +19,13 @@ export const HomeScreen: React.FC = () => {
 	const [searchQuery, setSearchQuery] = useState("")
 	const [tasks, setTasks] = useState<Task[]>(mockTasks)
 	const [isAddTaskVisible, setIsAddTaskVisible] = useState(false)
+	const [selectedTask, setSelectedTask] = useState<Task | null>(null)
 
 	const handleToggleComplete = (id: string) => setTasks((prevTasks) => prevTasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)))
 
-	const handleMenuPress = (id: string) => {
-		console.log("Menu pressed for task:", id)
+	const handleTaskPress = (id: string) => {
+		const task = tasks.find((t) => t.id === id)
+		if (task) setSelectedTask(task)
 	}
 
 	const handleAddTask = () => setIsAddTaskVisible(true)
@@ -45,6 +48,16 @@ export const HomeScreen: React.FC = () => {
 		setTasks((prevTasks) => [task, ...prevTasks])
 	}
 
+	const handleUpdateTask = (updatedTask: Task) => {
+		setTasks((prevTasks) => prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task)))
+		setSelectedTask(updatedTask)
+	}
+
+	const handleDeleteTask = (id: string) => {
+		setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id))
+		setSelectedTask(null)
+	}
+
 	const handleNotificationPress = () => {
 		console.log("Notifications pressed")
 	}
@@ -57,6 +70,18 @@ export const HomeScreen: React.FC = () => {
 	})
 
 	const sortedTasks = filteredTasks.sort((a, b) => Number(a.completed) - Number(b.completed))
+
+	if (selectedTask) {
+		return (
+			<TaskDetailScreen
+				task={selectedTask}
+				onBack={() => setSelectedTask(null)}
+				onDelete={handleDeleteTask}
+				onUpdate={handleUpdateTask}
+				onToggleComplete={handleToggleComplete}
+			/>
+		)
+	}
 
 	return (
 		<SafeAreaView style={styles.container}>

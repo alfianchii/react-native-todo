@@ -43,7 +43,6 @@ export const SelectSheet: React.FC<SelectSheetProps> = ({
 
 	return (
 		<BottomSheet visible={visible} onClose={onClose}>
-			{/* Header */}
 			<View style={styles.header}>
 				<Text style={styles.headerTitle}>{title}</Text>
 				<TouchableOpacity
@@ -55,7 +54,6 @@ export const SelectSheet: React.FC<SelectSheetProps> = ({
 				</TouchableOpacity>
 			</View>
 
-			{/* Options */}
 			<View style={styles.optionsContainer}>
 				{options.map((option) => (
 					<TouchableOpacity
@@ -98,7 +96,6 @@ export const SelectSheet: React.FC<SelectSheetProps> = ({
 				))}
 			</View>
 
-			{/* Safe area padding */}
 			<View style={styles.safeArea} />
 		</BottomSheet>
 	)
