@@ -2,19 +2,15 @@ import React from "react"
 import { View, Text, TouchableOpacity, StyleSheet, ImageSourcePropType, StatusBar } from "react-native"
 import { colors } from "@theme/colors"
 import { Avatar } from "@components/Base/Avatar"
-import { Button } from "@components/Base/Button"
-import { Badge } from "@components/Base/Badge"
 
 interface HeaderProps {
 	userName: string
 	greeting: string
 	avatarUrl?: string | ImageSourcePropType
-	hasNotifications?: boolean
-	onNotificationPress?: () => void
 	onAvatarPress?: () => void
 }
 
-export const Header: React.FC<HeaderProps> = ({ userName, greeting, avatarUrl, hasNotifications = true, onNotificationPress, onAvatarPress }) => {
+export const Header: React.FC<HeaderProps> = ({ userName, greeting, avatarUrl, onAvatarPress }) => {
 	const defaultAvatarUrl = require("@images/gw-ganteng.jpg")
 
 	return (
@@ -28,11 +24,6 @@ export const Header: React.FC<HeaderProps> = ({ userName, greeting, avatarUrl, h
 					<Text style={styles.userName}>{userName}</Text>
 				</View>
 			</TouchableOpacity>
-
-			<View style={styles.notificationContainer}>
-				<Button icon="notifications" onPress={onNotificationPress} size={40} iconSize={24} iconColor={colors.textMain} />
-				{hasNotifications && <Badge color={colors.notification} size={8} style={styles.notificationBadge} />}
-			</View>
 		</View>
 	)
 }

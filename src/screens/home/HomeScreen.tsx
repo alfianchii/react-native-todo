@@ -66,10 +66,6 @@ export const HomeScreen: React.FC = () => {
 		setSelectedTask(null)
 	}
 
-	const handleNotificationPress = () => {
-		console.log("Notifications pressed")
-	}
-
 	const filteredTasks = tasks.filter((task) => {
 		if (searchQuery.trim()) {
 			const query = searchQuery.toLowerCase()
@@ -98,7 +94,7 @@ export const HomeScreen: React.FC = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Header userName="Alfian Taka" greeting="Good Morning" hasNotifications={true} onNotificationPress={handleNotificationPress} />
+			<Header userName="Alfian Taka" greeting="Good Morning" />
 
 			<SearchBar value={searchQuery} onChangeText={setSearchQuery} />
 
