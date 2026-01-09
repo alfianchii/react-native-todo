@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { LinearGradient } from "expo-linear-gradient"
 import { colors } from "@theme/colors"
 import { mockTasks, filterOptions } from "@data/mockTasks"
-import { Task, Priority } from "@type/task"
+import { Task, Priority, Category } from "@type/task"
 import { Header } from "@components/Layout/Header"
 import { SearchBar } from "@components/Task/SearchBar"
 import { FilterChips } from "@components/Task/FilterChips"
@@ -37,12 +37,20 @@ export const HomeScreen: React.FC = () => {
 			"Low": "low",
 		}
 
+		const categoryMap: Record<string, Category> = {
+			"Inbox": "inbox",
+			"Work": "work",
+			"Personal": "personal",
+			"College": "college",
+		}
+
 		const task: Task = {
 			id: Date.now().toString(),
 			title: newTask.title,
 			description: newTask.description,
 			dueDate: getDateFromSelection(newTask.dueDate),
-			priority: priorityMap[newTask.priority] || "low",
+			priority: priorityMap[newTask.priority],
+			category: categoryMap[newTask.category],
 			completed: false,
 		}
 		setTasks((prevTasks) => [task, ...prevTasks])
