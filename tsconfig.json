@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"jsx": "react-jsx",
+		"strict": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": ["./src/components/*"],
+			"@screens/*": ["./src/screens/*"],
+			"@theme/*": ["./src/theme/*"],
+			"@type/*": ["src/types/*"],
+			"@data/*": ["./src/data/*"],
+			"@images/*": ["./src/assets/images/*"]
+		}
+	},
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "App.tsx", "index.ts"],
+	"extends": "expo/tsconfig.base"
+}
