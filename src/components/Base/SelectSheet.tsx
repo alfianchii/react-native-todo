@@ -8,16 +8,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@theme/colors"
 import { BottomSheet } from "./BottomSheet"
-
-type MaterialIconName = keyof typeof MaterialIcons.glyphMap
-
-interface SelectOption {
-	id: string
-	label: string
-	icon?: MaterialIconName
-	iconColor?: string
-	iconBackgroundColor?: string
-}
+import { SelectOption } from "@type/options"
 
 interface SelectSheetProps {
 	visible: boolean
@@ -43,7 +34,6 @@ export const SelectSheet: React.FC<SelectSheetProps> = ({
 
 	return (
 		<BottomSheet visible={visible} onClose={onClose}>
-			{/* Header */}
 			<View style={styles.header}>
 				<Text style={styles.headerTitle}>{title}</Text>
 				<TouchableOpacity
@@ -55,7 +45,6 @@ export const SelectSheet: React.FC<SelectSheetProps> = ({
 				</TouchableOpacity>
 			</View>
 
-			{/* Options */}
 			<View style={styles.optionsContainer}>
 				{options.map((option) => (
 					<TouchableOpacity
@@ -98,7 +87,6 @@ export const SelectSheet: React.FC<SelectSheetProps> = ({
 				))}
 			</View>
 
-			{/* Safe area padding */}
 			<View style={styles.safeArea} />
 		</BottomSheet>
 	)
